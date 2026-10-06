@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risang's Home Page</title>
+    <!-- Importing Inter font to maintain typographic rhythm -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
+    <style>
+        /* 1. Theme and Variable Definitions */
+        :root {
+            --background: #e5e3df;        /* Warm premium beige */
+            --text: #1a1a1a;              /* Stark dark grey */
+            --line-color: #1a1a1a;
+            --btn-bg: transparent;
+            --btn-text: #1a1a1a;
+            --btn-border: #1a1a1a;
+            --img-opacity: 1;
+        }
+
+        body.dark {
+            --background: #111111;        /* Midnight dark background */
+            --text: #ffffff;              /* Pure white */
+            --line-color: #333333;        /* Softened layout lines for dark mode */
+            
+            /* HIGHLIGHT: Button matches the white text color exactly */
+            --btn-bg: #ffffff;            /* Solid white highlight background */
+            --btn-text: #111111;          /* Dark text inside the button for legibility */
+            --btn-border: #ffffff;        /* White border */
+            --img-opacity: 0.85;          /* Dims the image slightly in dark mode */
+        }
+
+        /* 2. Global Layout & Resets */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            transition: background-color 0.4s ease, color 0.4s ease;
+            font-family: 'Inter', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1440px;
+            padding: 8% 10%;
+        }
+
+        /* NEW: Flexbox layout box to stack headline components perfectly */
+        .headline-group {
+            position: absolute;
+            top: 8%;
+            left: 10%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem; 
+        }
+
+        /* 3. Typography & UI Design Blocks */
+        .main-title {
+            font-size: clamp(4rem, 8vw, 8rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+            text-transform: lowercase;
+        }
+
+        /* NEW: Smaller image dimensions and style transitions */
+        .headline-image {
+            width: 240px; /* Limits the size of the icon */
+            height: auto;
+            object-fit: contain;
+            opacity: var(--img-opacity);
+            transition: opacity 0.4s ease;
+        }
+
+        /* NEW: Styled companion subtext */
+        .sub-headline {
+            font-size: clamp(0.9rem, 1.2vw, 1.2rem);
+            font-weight: 400;
+            line-height: 1.4;
+            max-width: 300px;
+            opacity: 0.8;
+        }
+
+        .details-block {
+            position: absolute;
+            top: 35%;
+            left: 48%;
+        }
+
+        .name {
+            font-size: clamp(1.5rem, 2.5vw, 3rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        /* Bottom Layout Labels & Socials */
+        .footer-label {
+            position: absolute;
+            bottom: 8%;
+            right: 10%;
+            font-size: clamp(0.8rem, 1vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+        }
+
+        .footer-socials {
+            position: absolute;
+            bottom: 8%;
+            left: 48%; /* Balanced in the lower grid area opposite Home Page */
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-social-link {
+            font-size: clamp(0.8rem, 1vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--text);
+            text-decoration: none;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-link:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+
+        /* 4. Structural Layout Lines */
+        .vertical-line {
+            position: absolute;
+            top: 10%;
+            left: 45%;
+            width: 1px;
+            height: 65%;
+            background-color: var(--line-color);
+            transition: background-color 0.4s ease;
+        }
+
+        .horizontal-line {
+            position: absolute;
+            top: 30%;
+            left: 45%;
+            width: 45%;
+            height: 1px;
+            background-color: var(--line-color);
+            transition: background-color 0.4s ease;
+        }
+
+        /* 5. Components: Buttons & Toggles */
+        .about-button {
+            position: absolute;
+            bottom: 8%;
+            left: 10%;
+            font-size: clamp(0.8rem, 1vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-decoration: none;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            display: inline-block;
+            
+            /* Wired directly to theme switch variables */
+            background-color: var(--btn-bg);
+            color: var(--btn-text);
+            border: 1px solid var(--btn-border);
+            
+            /* Smoothly animates colors when switching to dark mode or hovering */
+            transition: all 0.4s ease; 
+        }
+
+        .about-button:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+        }
+
+        /* Floating Theme Switch Controller */
+        #theme-toggle {
+            position: absolute;
+            top: 8%;
+            right: 10%;
+            border: 1px solid var(--text);
+            border-radius: 50%;
+            background: transparent;
+            color: var(--text);
+            cursor: pointer;
+            font-size: 18px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        #theme-toggle:hover {
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <main class="hero-container">
+        <!-- Theme Toggle Controller -->
+        <button id="theme-toggle" aria-label="Toggle dark mode">☾</button>
+
+        <!-- Grouped Headline Element Stack -->
+        <div class="headline-group">
+            <h1 class="main-title">home.</h1>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYzAwIRdPqHRIVOHfIBlT0pEn7mdBO5i752DCOVTbH4w&s=10" alt="Visual Studio Code Icon" class="headline-image">
+            <h1 class="sub-headline">This is a website made with Visual Studio Code</h1>
+        </div>
+
+        <!-- Thin Minimal Layout Lines -->
+        <div class="vertical-line"></div>
+        <div class="horizontal-line"></div>
+
+        <!-- The dynamically highlighted button -->
+        <a href="about.html" class="about-button">About Me</a>
+
+        <div class="details-block">
+            <h2 class="name">RISANG<br>JAVAS MAHARDIKA</h2>
+        </div>
+
+        <!-- Social Forwarding Links (Opposite of Home Page) -->
+        <div class="footer-socials">
+            <a href="https://github.com/risang883-collab" target="_blank" rel="noopener" class="footer-social-link">GitHub</a>
+            <a href="https://www.youtube.com/@yepimrisang" target="_blank" rel="noopener" class="footer-social-link">YouTube</a>
+        </div>
+
+        <!-- Bottom Niche Label -->
+        <div class="footer-label">
+            HOME PAGE
+        </div>
+    </main>
+
+    <!-- JavaScript to toggle the body state class -->
+    <script>
+        const button = document.getElementById("theme-toggle");
+
+        button.addEventListener("click", function () {
+            document.body.classList.toggle("dark");
+
+            if (document.body.classList.contains("dark")) {
+                button.textContent = "☀";
+            } else {
+                button.textContent = "☾";
+            }
+        });
+    </script>
+</body>
+</html>
+
+
