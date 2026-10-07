@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+    <!-- Importing Inter font to maintain typographic rhythm -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        /* 1. Define Color Themes using CSS Variables */
+        :root {
+            --bg-color: #e5e3df;       /* Warm premium beige tone */
+            --text-color: #1a1a1a;     /* Stark dark grey text */
+            --line-color: #1a1a1a;
+            --btn-hover-bg: #1a1a1a;
+            --btn-hover-text: #e5e3df;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;       /* Premium dark background */
+            --text-color: #e5e3df;     /* Off-white text */
+            --line-color: #e5e3df;
+            --btn-hover-bg: #e5e3df;
+            --btn-hover-text: #121212;
+        }
+
+        /* Reset basic styles and establish layout defaults */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: background-color 0.4s ease, color 0.4s ease; /* Smooth transition when switching modes */
+        }
+        
+        /* Master Container matching the home layout padding */
+        .about-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            max-width: 1440px;
+            padding: 8% 10%;
+        }
+        
+        /* Top Page Headline */
+        .main-title {
+            font-size: clamp(4rem, 8vw, 8rem);
+            font-weight: 800;
+            letter-spacing: -0.04em;
+            line-height: 1;
+        }
+        
+        /* Structural Design Lines - framing the profile text block */
+        .vertical-line {
+            position: absolute;
+            top: 10%;
+            left: 45%;
+            width: 1px;
+            height: 65%;
+            background-color: var(--line-color);
+            transition: background-color 0.4s ease;
+        }
+        
+        .horizontal-line {
+            position: absolute;
+            top: 30%;
+            left: 45%;
+            width: 45%;
+            height: 1px;
+            background-color: var(--line-color);
+            transition: background-color 0.4s ease;
+        }
+        
+        /* Narrative/Bio Text Layout Area */
+        .bio-block {
+            position: absolute;
+            top: 35%;
+            left: 48%;
+            width: 42%;
+            max-height: 45%;
+            overflow-y: auto; /* Adds a clean scroll if text runs long */
+        }
+        
+        /* Clean modern typography styling for paragraph copy */
+        .bio-text {
+            font-size: clamp(1rem, 1.3vw, 1.4rem);
+            font-weight: 400;
+            line-height: 1.7;
+            letter-spacing: -0.01em;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Small secondary informational header */
+        .bio-subtitle {
+            font-size: clamp(0.9rem, 1.1vw, 1.2rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+        
+        /* Buttons general transitions styling */
+        .back-button, .theme-toggle {
+            position: absolute;
+            font-size: clamp(0.8rem, 1vw, 1.1rem);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            color: var(--text-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            border: 1px solid var(--text-color);
+            padding: 12px 24px;
+            background: transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .back-button {
+            bottom: 8%;
+            left: 10%;
+            display: inline-block;
+        }
+
+        /* 2. Styling for the Dark/Light Mode Button */
+        .theme-toggle {
+            top: 8%;
+            right: 10%;
+        }
+        
+        .back-button:hover, .theme-toggle:hover {
+            background-color: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+        }
+    </style>
+</head>
+<body>
+    <main class="about-container">
+        <!-- Theme Toggle Button -->
+        <button id="themeToggle" class="theme-toggle">☾</button>
+
+        <!-- Page Title -->
+        <h1 class="main-title">about.</h1>
+        
+        <!-- Framing Lines -->
+        <div class="vertical-line"></div>
+        <div class="horizontal-line"></div>
+        
+        <!-- Main Narrative Content -->
+        <div class="bio-block">
+            <h2 class="bio-subtitle">What has happened over these 13 years</h2>
+            <p class="bio-text">
+                Hello I am Risang Javas Mahardika. 13 and a junior high school student at CHIS, it has been only 2 years being in Indonesia but im really enjoying my time here, plenty of lovely pets and friends and i love how my life is going.
+            </p>
+            <p class="bio-text">
+                1. Hobbies: Petting my cats, feeding them, staying on the computer for too long (playing fisch), watching the same movie over and over again, playing badminton, listening to my favorite and handpicked playlist.<br><br>
+                2. Interests: I love pokemon, project sekai, going out with my friends or alone, and vocaloids.<br><br>
+                3. How i spend my time: I spend my time doing that have music and the solvent for that is my playlist, fisch as mentioned, and checking my phone for messages from my lovely friends.<br><br>
+                4. Skills: Im good at badminton, english, and my personal favorite rubiks cubes
+            </p>
+        </div>
+        
+        <!-- Return Home Action Button -->
+        <a href="index.html" class="back-button">← Back Home</a>
+    </main>
+
+    <!-- 3. JavaScript to handle theme shifting and button text change -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        
+        themeToggleBtn.addEventListener('click', () => {
+            // Check current active theme attribute
+            const currentTheme = document.body.getAttribute('data-theme');
+            
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeToggleBtn.textContent = '☾';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggleBtn.textContent = '☀';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
